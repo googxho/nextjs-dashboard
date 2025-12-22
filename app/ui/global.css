@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 
+第一性原则：CSS 选择器在“描述什么”
+一句话总规律：CSS 选择器 = “选谁 + 在什么关系下 + 处于什么状态/部位”
+所有选择器都可以被归入这三类信息之一。 
+*/
+/* input + type是number + 无 */
 input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
