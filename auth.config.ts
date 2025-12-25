@@ -1,6 +1,9 @@
 import type { NextAuthConfig } from 'next-auth';
  
 export const authConfig = {
+  // Secret used by Auth.js/NextAuth for signing tokens. Prefer setting
+  // NEXTAUTH_SECRET in environment for production.
+  secret: process.env.AUTH_SECRET,
   providers: [],
   pages: {
     signIn: '/login',
