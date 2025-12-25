@@ -1,14 +1,23 @@
 // app/auth.ts
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { authConfig } from './auth.config';
+import { authConfig } from './app/auth.config';
 import { z } from 'zod';
 import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
 import postgres from 'postgres';
 
+// 部署时的环境变量检查 — 在 Vercel 日志中给出清晰错误信息
+if (!process.env.POSTGRES_URL) {
+  throw new Error('POSTGRES_URL environment variable is not set. Please configure it in Vercel dashboard.');
+}
+
 // 云数据库连接
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+
+if (!process.env.NEXTAUTH_SECRET) {
+  console.warn('WARNING: NEXTAUTH_SECRET is not set. Please set NEXTAUTH_SECRET in Vercel environment variables.');
+}
 
 export async function getUser(email: string): Promise<User | undefined> {
   try {
