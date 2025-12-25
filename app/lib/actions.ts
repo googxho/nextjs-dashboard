@@ -75,7 +75,7 @@ export async function deleteInvoice(id: string) {
   revalidatePath('/dashboard/invoices');
 }
 
- export async function authenticate(
+export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
 ) {
